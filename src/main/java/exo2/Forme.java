@@ -10,10 +10,12 @@ public class Forme {
 	 */
 	protected Color c;
 	protected Point p;
+	protected String nom;
 
 	public Forme(FormeBuilder fb) {
 		this.c = FormeBuilder.c;
 		this.p = FormeBuilder.p;
+		this.nom = FormeBuilder.nom;
 	}
 
 	public void colorier(Color c) {
@@ -41,6 +43,7 @@ public class Forme {
 		protected static Color c = new Color((float) 0.0, (float) 0.0,
 				(float) 0.0);
 		protected static Point p = new Point(0, 0);
+		protected static String nom = "";
 
 		public Forme build() {
 			return new Forme(this);
@@ -57,6 +60,11 @@ public class Forme {
 
 		public FormeBuilder Point(Point pt) {
 			p = pt;
+			return this;
+		}
+
+		public FormeBuilder Nom(String Nom) {
+			nom = Nom;
 			return this;
 		}
 	}
