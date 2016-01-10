@@ -59,6 +59,10 @@ public class Message {
 	 *            Contenu du message
 	 */
 	public Message(Type t, int taille, String st) {
+
+		if (taille < 0)
+			throw new IllegalArgumentException();
+
 		this.t = t;
 		this.taille = taille;
 		this.st = st;
