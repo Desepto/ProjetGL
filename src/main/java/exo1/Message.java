@@ -90,28 +90,42 @@ public class Message {
 		return this.taille == taille;
 	}
 
-	public boolean filtre(Object o) {
-
-		if (o.getClass() == this.t.getClass())
-			return this.t.equals(o);
-		if (o.getClass() == ((Integer) this.taille).getClass())
-			return ((Integer) this.taille).equals(o);
-		if (o.getClass() == this.st.getClass())
-			return this.st.equals(o);
-
-		throw new IllegalArgumentException();
-	}
-
 	/**
 	 * Indique si le message correspond au filtre. On considère que le message
 	 * doit être filtré si les deux contenus sont identiques
 	 * 
 	 * @param st
 	 *            Contenu du message sur lequel filtrer
-	 * @return Vrai si les messages sont identiques
+	 * @return Vrai si le message en paramètre est contenu dans celui en
+	 *         attribut
 	 */
 	public boolean filtre(String st) {
-		return this.st == st;
+		return this.st.contains(st);
+	}
+
+	/**
+	 * Méthode "jolie" permettant de filtrer sans se préocuper du type de filtre
+	 * lors de l'appel de la fonction. Elle est équivalent à la triple surcharge
+	 * de la méthode filtre.
+	 * 
+	 * @param o
+	 *            Object devant être un Type/int/String correpondant à un filtre
+	 * @return Vrai si ça correspond, faux sinon
+	 */
+	public boolean filtre(Object o) {
+
+		try {
+
+			if (o.getClass() == this.t.getClass())
+				return this.t.equals(o);
+			if (o.getClass() == ((Integer) this.taille).getClass())
+				return ((Integer) this.taille).equals(o);
+			if (o.getClass() == this.st.getClass())
+				return this.st.contains((String) o);
+		} catch (IllegalArgumentException E) {
+
+		}
+		return false;
 	}
 
 	/**
